@@ -1,10 +1,10 @@
 import Navbar from "../components/Navbar"
 import { Outlet } from "react-router-dom"
 
-const MainLayout = () => {
+const MainLayout = ( {setUser} ) => {
     return (
         <>
-            <Navbar />
+            <Navbar setUser={setUser}/>
             <Outlet />
         </>
     )
