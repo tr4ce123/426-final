@@ -1,6 +1,6 @@
 import axiosInstance from "../axios.js"
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Login = ({setUser}) => {
     const [username, setUsername] = useState("")
@@ -71,6 +71,14 @@ const Login = ({setUser}) => {
                             <button className="btn btn-primary" type="submit">Login</button>
                         </div>
                     </form>
+                    <div className="text-center mb-4">
+                        <p className="text-sm">
+                        Don't have an account?{" "}
+                        <Link to="/register" className="text-primary font-bold">
+                            Register
+                        </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
 

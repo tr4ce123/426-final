@@ -50,7 +50,19 @@ const Navbar = ({setUser}) => {
 
                 </div>
                 <div className="navbar-end">
-                    <LogoutButton setUser={setUser}/>
+                    <button className="btn btn-outline btn-error" onClick={()=>document.getElementById('my_modal_3').showModal()}>Logout</button>
+                    <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg">Are you sure you want to logout?</h3>
+                        <div className="absolute bottom-4 right-4">
+                            <LogoutButton setUser={setUser}/>
+                        </div>
+                    </div>
+                    <form method="dialog" className="modal-backdrop">
+                        <button>close</button>
+                    </form>
+
+                    </dialog>
                 </div>
 
             </div>

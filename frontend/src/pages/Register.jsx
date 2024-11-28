@@ -1,44 +1,39 @@
-import axiosInstance from "../axios";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import axiosInstance from "../axios"
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 const Register = ({ setUser }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // Added for password confirmation
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    // Check if passwords match
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
+      setError("Passwords do not match")
+      return
     }
 
     try {
-      // Send registration data to backend
-      await axiosInstance.post("/register", { username, password });
+      await axiosInstance.post("/register", { username, password })
 
-      // Optionally, log in the user automatically after registration
-      const loginResponse = await axiosInstance.post("/login", { username, password });
-      const { token } = loginResponse.data;
-      localStorage.setItem("authToken", token);
+      const loginResponse = await axiosInstance.post("/login", { username, password })
+      const { token } = loginResponse.data
+      localStorage.setItem("authToken", token)
 
-      // Fetch user data and set user state
-      const { data } = await axiosInstance.get("/protected");
-      setUser(data.user);
+      const { data } = await axiosInstance.get("/protected")
+      setUser(data.user)
 
-      // Redirect to home page
-      navigate("/home");
+      navigate("/home")
     } catch (err) {
-      console.error(err);
+      console.error(err)
       if (err.response && err.response.status === 409) {
-        setError("User already exists");
+        setError("User already exists")
       } else {
-        setError("Error registering user");
+        setError("Error registering user")
       }
     }
   };
@@ -46,12 +41,12 @@ const Register = ({ setUser }) => {
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
-        setError("");
-      }, 5000);
+        setError("")
+      }, 5000)
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer)
     }
-  }, [error]);
+  }, [error])
 
   return (
     <div className="hero bg-base-200 min-h-screen flex justify-center relative">
@@ -102,6 +97,15 @@ const Register = ({ setUser }) => {
               <button className="btn btn-primary" type="submit">Register</button>
             </div>
           </form>
+
+          <div className="text-center mb-4">
+            <p className="text-sm">
+              Already have an account?{" "}
+              <Link to="/login" className="text-primary font-bold">
+                Login
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -126,7 +130,7 @@ const Register = ({ setUser }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

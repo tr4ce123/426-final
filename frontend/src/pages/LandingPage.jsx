@@ -15,8 +15,8 @@ const LandingPage = () => {
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
-                    <Link to="/login">
-                        <button className="btn btn-primary">Log In</button>
+                    <Link to="/register">
+                        <button className="btn glass">Sign Up</button>
                     </Link>
                 </div>
             </div>
