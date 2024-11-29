@@ -16,6 +16,8 @@ import Login from './pages/Login'
 import ProtectedRoute from './ProtectedRoute'
 import axiosInstance from './axios'
 import Register from './pages/Register'
+import CatchPokemon from './pages/CatchPokemon'
+import Pokedex from './pages/Pokedex'
 
 function App() {
   const [user, setUser] = useState()
@@ -72,10 +74,18 @@ function App() {
             }
           />
           <Route
-            path="/page1"
+            path="/catch-pokemon"
             element={
               <ProtectedRoute user={user}>
-                <Page />
+                <CatchPokemon />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pokedex"
+            element={
+              <ProtectedRoute user={user}>
+                <Pokedex />
               </ProtectedRoute>
             }
           />
