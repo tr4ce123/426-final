@@ -293,3 +293,39 @@ app.delete("/pokedex/:pokemonId", async (req, res) => {
         res.status(500).send({ message: "Error deleting Pokemon" });
     }
 });
+
+app.put("/pokedex/:pokemonId" , async (req, res) => {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+        return res.status(401).send({ message: "Unauthorized" });
+    }
+    
+    const token = authHeader.split(" ")[1];
+    
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const username = decoded.username;
+
+        const pokemonId = parseInt( req.params.pokemonId );
+        const { name } = req.body;
+        
+        const pokemonCollection = await db.collection("pokemon");
+        const updateResult = await pokemonCollection.updateOne(
+            { username, pokemonId },
+            { $set: { name } }
+        );
+
+        if (updateResult.matchedCount === 0) {
+            return res.status(404).send({ message: "Pokemon not found in your Pokedex" });
+        }
+        
+        res.status(200).send({ message: "Pokemon name updated successfully" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: "Error updating Pokemon name" });
+    }
+
+})
+

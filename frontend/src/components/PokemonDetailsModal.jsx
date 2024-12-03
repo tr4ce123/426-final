@@ -6,7 +6,7 @@ function PokemonDetailsModal({ pokemon, onClose }) {
     const [pokemonDetails, setPokemonDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate()
+    const [newName, setNewName] = useState("")
 
     useEffect(() => {
         const fetchPokemonDetails = async () => {
@@ -17,6 +17,7 @@ function PokemonDetailsModal({ pokemon, onClose }) {
 
                 const response = await axiosInstance.get(`/pokemon-details/${pokemon.pokemonId}`);
                 setPokemonDetails(response.data);
+                setNewName(pokemon.name);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching Pokemon details:', error);
@@ -41,7 +42,16 @@ function PokemonDetailsModal({ pokemon, onClose }) {
             console.error("Error deleting Pokemon", err)
             setError(err)
         }
-    }  
+    }
+
+    const handleUpdateName = async (id) => {
+        try {
+            await axiosInstance.put(`/pokedex/${id}`, { name: newName });    
+        } catch (err) {
+            console.error("Error updating pokemon name", err)
+            setError(err)
+        }
+    }
 
     if (loading) {
         return (
@@ -67,7 +77,6 @@ function PokemonDetailsModal({ pokemon, onClose }) {
         <dialog open className="modal" onClick={handleOverlayClick}>
             <div className="modal-box w-11/12 max-w-2xl">
                 <h3 className="font-bold text-2xl capitalize text-center mb-4">{pokemon.name}</h3>
-
                 <div className="flex flex-col md:flex-row items-center">
                     <div className="w-full md:w-1/2 flex justify-center">
                         <img 
@@ -109,6 +118,22 @@ function PokemonDetailsModal({ pokemon, onClose }) {
                                     ></progress>
                                 </div>
                             ))}
+                        </div>
+
+                        <h4 className="text-xl font-semibold mt-4 mb-2">Update Name</h4>
+                        <div className="flex gap-2 items-center">
+                            <input 
+                                type="text" 
+                                value={newName} 
+                                onChange={(e) => setNewName(e.target.value)} 
+                                className="input input-bordered w-full" 
+                            />
+                            <button 
+                                onClick={() => handleUpdateName(pokemon.pokemonId)} 
+                                className="btn btn-primary"
+                            >
+                                Update
+                            </button>
                         </div>
                     </div>
                 </div>
