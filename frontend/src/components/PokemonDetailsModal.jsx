@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function PokemonDetailsModal({ pokemon, onClose }) {
     const [pokemonDetails, setPokemonDetails] = useState(null);
@@ -120,6 +120,14 @@ function PokemonDetailsModal({ pokemon, onClose }) {
                     >
                         Delete Pokemon
                     </button>
+                    <Link to="/pokedex">
+                        <button 
+                            onClick={onClose} 
+                            className="btn btn-ghost"
+                        >
+                            Pokedex
+                        </button>
+                    </Link>
                     <button 
                         onClick={onClose} 
                         className="btn btn-ghost"
