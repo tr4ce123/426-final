@@ -101,6 +101,21 @@ function PokemonDetailsModal({ pokemon, onClose }) {
                         </div>
                     </div>
                 </div>
+
+                <div className="modal-action">
+                    <button 
+                        onClick={handleDelete} 
+                        className="btn btn-error"
+                    >
+                        Delete Pokemon
+                    </button>
+                    <button 
+                        onClick={onClose} 
+                        className="btn btn-ghost"
+                    >
+                        Close
+                    </button>
+                </div>
             </div>
         </dialog>
     );

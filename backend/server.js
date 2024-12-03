@@ -261,3 +261,35 @@ app.get("/pokemon-details/:pokemonId", async (req, res) => {
         res.status(500).send({ message: "Error fetching Pokemon details" });
     }
 });
+
+app.delete("/pokedex/:pokemonId", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+        return res.status(401).send({ message: "Unauthorized" });
+    }
+    
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const username = decoded.username;
+        const pokemonId = parseInt(req.params.pokemonId);
+        
+        const pokemonCollection = await db.collection("pokemon");
+        
+        const result = await pokemonCollection.deleteOne({ 
+            username, 
+            pokemonId 
+        });
+        
+        if (result.deletedCount === 0) {
+            return res.status(404).send({ message: "Pokemon not found in your Pokedex" });
+        }
+        
+        res.status(200).send({ message: "Pokemon successfully deleted" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Error deleting Pokemon" });
+    }
+});
