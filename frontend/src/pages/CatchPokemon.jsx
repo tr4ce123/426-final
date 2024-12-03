@@ -95,7 +95,7 @@ function CatchPokemon() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Catch a Pokemon</h1>
+            <h1 className="text-4xl font-bold mb-4">Catch a Pokemon</h1>
             
             {showCatchGif && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -107,19 +107,21 @@ function CatchPokemon() {
                 </div>
             )}
 
-            <button 
-                onClick={handleCatchPokemon} 
-                disabled={!canCatch || !gifLoaded}
-                className={`btn ${canCatch && gifLoaded ? 'btn-primary' : 'btn-disabled'}`}
-            >
-                {!gifLoaded 
-                    ? 'Loading...' 
-                    : (canCatch 
-                        ? 'Catch Pokemon' 
-                        : `Cooldown: ${formatTime(cooldown)}`
-                    )
-                }
-            </button>
+            <div className="flex justify-center mt-4">
+                <button 
+                    onClick={handleCatchPokemon} 
+                    disabled={!canCatch || !gifLoaded}
+                    className={`btn ${canCatch && gifLoaded ? 'btn-primary' : 'btn-disabled'}`}
+                >
+                    {!gifLoaded 
+                        ? 'Loading...' 
+                        : (canCatch 
+                            ? 'Catch Pokemon' 
+                            : `Cooldown: ${formatTime(cooldown)}`
+                        )
+                    }
+                </button>
+            </div>
 
             {currentPokemon && isModalOpen && (
                 <PokemonDetailsModal 

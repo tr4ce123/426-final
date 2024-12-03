@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Hero from "../components/Hero"
 import axiosInstance from "../axios";
+import CatchPokemon from "./CatchPokemon";
 
 const HomePage = () => {
     const [data, setData] = useState(null);
@@ -22,14 +23,12 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="flex flex-col">
-                <Hero name={data?.user?.username} />
-                <div className="flex w-full flex-col border-opacity-50">
-                    {/* <div className="card bg-base-300 rounded-box grid h-20 place-items-center">content</div>
-                    <div className="divider">OR</div>
-                    <div className="card bg-base-300 rounded-box grid h-20 place-items-center">content</div> */}
-                </div>
+        <div className="flex flex-col items-center justify-center">
+            <Hero name={data?.user?.username} />
+            <div className="mt-8">
+                <CatchPokemon />
             </div>
+        </div>
         </>
     )
 }

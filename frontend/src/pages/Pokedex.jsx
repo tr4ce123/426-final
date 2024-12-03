@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
 import PokemonCard from '../components/PokemonCard';
 
-function Pokedex() {
+function Pokedex({user}) {
     const [pokedex, setPokedex] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -31,7 +31,7 @@ function Pokedex() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4 text-center">Pokedex</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">{user.username}'s Pokedex</h1>
             
             {pokedex.length === 0 ? (
                 <p>You haven't caught any Pokemon yet!</p>

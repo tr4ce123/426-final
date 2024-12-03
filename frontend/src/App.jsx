@@ -74,18 +74,10 @@ function App() {
             }
           />
           <Route
-            path="/catch-pokemon"
-            element={
-              <ProtectedRoute user={user}>
-                <CatchPokemon />
-              </ProtectedRoute>
-            }
-          />
-          <Route
             path="/pokedex"
             element={
               <ProtectedRoute user={user}>
-                <Pokedex />
+                <Pokedex user={user}/>
               </ProtectedRoute>
             }
           />

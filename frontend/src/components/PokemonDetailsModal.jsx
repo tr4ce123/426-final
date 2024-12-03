@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
+import { useNavigate } from 'react-router-dom';
 
 function PokemonDetailsModal({ pokemon, onClose }) {
     const [pokemonDetails, setPokemonDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchPokemonDetails = async () => {
@@ -31,6 +33,15 @@ function PokemonDetailsModal({ pokemon, onClose }) {
             onClose();
         }
     };
+
+    const handleDelete = async (id) => {
+        try {
+            await axiosInstance.delete(`/pokedex/${id}`)
+        } catch (err) {
+            console.error("Error deleting Pokemon", err)
+            setError(err)
+        }
+    }  
 
     if (loading) {
         return (
@@ -104,7 +115,7 @@ function PokemonDetailsModal({ pokemon, onClose }) {
 
                 <div className="modal-action">
                     <button 
-                        onClick={handleDelete} 
+                        onClick={() => handleDelete(pokemon.pokemonId)} 
                         className="btn btn-error"
                     >
                         Delete Pokemon
