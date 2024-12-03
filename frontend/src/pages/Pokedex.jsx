@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
 import PokemonCard from '../components/PokemonCard';
+import image from "../assets/pokedex.jpg"
+
 
 function Pokedex({user}) {
     const [pokedex, setPokedex] = useState([]);

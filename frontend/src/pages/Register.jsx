@@ -1,6 +1,7 @@
 import axiosInstance from "../axios"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import image from "../assets/pokemon-ball.jpg"
 
 const Register = ({ setUser }) => {
   const [username, setUsername] = useState("")
@@ -49,7 +50,13 @@ const Register = ({ setUser }) => {
   }, [error])
 
   return (
-    <div className="hero bg-base-200 min-h-screen flex justify-center relative">
+    <div
+    className="hero min-h-screen"
+    style={{
+        backgroundImage: `url(${image})`,
+    }}
+>
+    <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content flex-col">
         <div className="card bg-base-100 w-96 shadow-2xl">
           <h1 className="ml-8 mt-8 text-3xl font-bold">Register now!</h1>

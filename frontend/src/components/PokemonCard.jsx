@@ -16,7 +16,7 @@ function PokemonCard({ pokemon }) {
         <>
             <div 
                 onClick={openModal} 
-                className="card bg-base-100 shadow-xl cursor-pointer hover:scale-105 transition-transform"
+                className="card border-red-500 border bg-base-100 shadow-xl cursor-pointer hover:scale-105 transition-transform"
             >
                 <figure>
                     <img 
