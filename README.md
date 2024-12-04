@@ -1,6 +1,6 @@
 # PokéCatch
 
-Link to video: 
+Link to video: https://www.youtube.com/watch?v=LSMLaRGj5qs&ab_channel=WeiJiang
 
 ## Tools used
 - React + Tailwind: event-driven frontend
